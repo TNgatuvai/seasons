@@ -8,17 +8,19 @@ class App extends React.Component {
         
         // THIS IS THE ONLY TIME we do direct assignment to this.state
         this.state = { lat: null, errorMessage: '' };
-
-        // call to get user's location 
-    window.navigator.geolocation.getCurrentPosition( 
-        position => {
-            this.setState({ lat: position.coords.latitude });
-        },
-        err => {
-            this.setState({ errorMessage: err.message });
-        }
-       );
+        
     }
+
+    componentDidMount() {
+        window.navigator.geolocation.getCurrentPosition( 
+            position => this.setState({ lat: position.coords.latitude }),
+            err => this.setState({ errorMessage: err.message })
+        );  
+    }
+
+    // componentDidUpdate() {
+    //     console.log('My component was just updated - it rerendered!');
+    // }
 
 
     // Conditional rendering 
